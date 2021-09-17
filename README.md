@@ -1,0 +1,1 @@
+Link to article: https://stacktonic.com/article/apache-airflow-2-0-examples-a-basic-dag-template-for-any-project
