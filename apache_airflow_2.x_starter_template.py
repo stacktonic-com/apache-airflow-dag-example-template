@@ -7,6 +7,7 @@
 import json
 import os
 from datetime import datetime, timedelta
+import pendulum
 
 # Airflow
 from airflow.models import DAG, Variable
@@ -35,9 +36,11 @@ from airflow.providers.google.cloud.transfers.local_to_gcs import LocalFilesyste
 # DAG settings
 ############################################################
 
+LOCAL_TZ = pendulum.timezone("Europe/Amsterdam")
+
 DAG_NAME = "stacktonic_example_dag" # DAG name (proposed format: lowercase underscore). Should be unique.
 DAG_DESCRIPTION = "Example DAG by Krisjan Oldekamp / stacktonic.com"
-DAG_START_DATE = days_ago(2) # Startdate. When setting the "catchup" parameter to True, you can perform a backfill when you insert a specific date here like datetime(2021, 6, 20)
+DAG_START_DATE = datetime(2021, 10, 15, tzinfo=LOCAL_TZ) # Startdate. When setting the "catchup" parameter to True, you can perform a backfill when you insert a specific date here like datetime(2021, 6, 20)
 DAG_SCHEDULE_INTERVAL = "@daily" # Cron notation -> see https://airflow.apache.org/scheduler.html#dag-runs
 DAG_CATCHUP = False # When set to true, DAG will start running from DAG_START_DATE instead of current date
 DAG_PAUSED_UPON_CREATION = True # Defaults to False. When set to True, uploading a DAG for the first time, the DAG doesn't start directly 
